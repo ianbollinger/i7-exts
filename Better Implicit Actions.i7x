@@ -57,7 +57,8 @@ rulebook. This is the better the can't put what's not held rule:
 	noun:
 		silently try the actor trying taking the noun;
 		if the actor is carrying the noun:
-			now implicitly taken before putting something on is true;
+			now implicitly taken before putting something on is
+			true;
 		otherwise:
 			stop the action.
 
