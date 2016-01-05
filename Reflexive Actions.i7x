@@ -81,7 +81,7 @@ Chapter 2.5 - Inserting something into
 The can't insert yourself into yourself rule is listed before the can't insert
 what's not held rule in the check inserting it into rulebook. This is the can't
 insert yourself into yourself rule:
-	if the actor is the second noun:
+	if the actor is the noun and the actor is the second noun:
 		if the actor is the player:
 			say "[We] [can't insert] [ourselves] into [ourselves]."
 			(A);
