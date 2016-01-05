@@ -529,7 +529,8 @@ rule:
 							say ", into [the
 							target][run paragraph
 							on]" (L);
-							now at least two items is true;
+							now at least two items
+							is true;
 					otherwise:
 						if first item is true:
 							if the actor is the
@@ -549,11 +550,12 @@ rule:
 						otherwise:
 							say ", [the target][run
 							paragraph on]" (O);
-							now at least two items is true;
+							now at least two items
+							is true;
 				break;
 			let the target be the holder of the target;
-	say "[if serial comma option is active and at least two items is true],[end
-	if] and [run paragraph on]" (P);
+	say "[if serial comma option is active and at least two items is
+	true],[end if] and [run paragraph on]" (P);
 
 The implicit passing through barriers before entering rule is listed before the
 standard report entering rule in the report entering rulebook. Report an actor
