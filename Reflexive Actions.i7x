@@ -420,8 +420,8 @@ to rulebook. This is the can't tie yourself to something rule:
 
 Chapter 2.41 - Drinking
 
-The can't drink yourself rule is listed first in the
-check drinking rulebook. This is the can't drink yourself rule:
+The can't drink yourself rule is listed first in the check drinking rulebook.
+This is the can't drink yourself rule:
 	if the actor is the noun:
 		if the actor is the player:
 			say "[We] [can't drink] [ourselves]." (A);
