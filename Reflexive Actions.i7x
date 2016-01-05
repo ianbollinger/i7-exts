@@ -33,7 +33,8 @@ what's not inside rule in the check removing it from rulebook. This is the can't
 remove yourself from something rule:
 	if the actor is the noun:
 		if the actor is the player:
-			say "[We] [can't remove] [ourselves] from anything." (A);
+			say "[We] [can't remove] [ourselves] from anything."
+			(A);
 		stop the action.
 
 Chapter 2.3 - Dropping
@@ -74,7 +75,8 @@ what's not held rule in the check inserting it into rulebook. This is the can't
 insert yourself into yourself rule:
 	if the actor is the second noun:
 		if the actor is the player:
-			say "[We] [can't insert] [ourselves] into [ourselves]." (A);
+			say "[We] [can't insert] [ourselves] into [ourselves]."
+			(A);
 		stop the action.
 
 The can't insert yourself into something rule is listed before the can't insert
@@ -82,7 +84,8 @@ what's not held rule in the check inserting it into rulebook. This is the can't
 insert yourself into something rule:
 	if the actor is the noun:
 		if the actor is the player:
-			say "[We] [can't insert] [ourselves] into anything." (A);
+			say "[We] [can't insert] [ourselves] into anything."
+			(A);
 		stop the action.
 
 The can't insert something into yourself rule is listed before the can't insert
@@ -90,7 +93,8 @@ what's not held rule in the check inserting it into rulebook. This is the can't
 insert something into yourself rule:
 	if the actor is the second noun:
 		if the actor is the player:
-			say "[We] [can't insert] anything into [ourselves]." (A);
+			say "[We] [can't insert] anything into [ourselves]."
+			(A);
 		stop the action.
 
 Chapter 2.6 - Eating
