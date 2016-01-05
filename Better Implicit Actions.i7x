@@ -6,6 +6,7 @@ Use authorial modesty.
 
 Chapter 1 - Verbs
 
+To enter is a verb.
 To fail is a verb.
 To insert is a verb.
 To throw is a verb.
@@ -45,7 +46,7 @@ The standard implicit taking rule response (A) is
 	"[We] [take] [the noun]. ".
 
 The standard implicit taking rule response (B) is
-	"[The actor] [take] [the noun]. ".
+	"[The second noun] [take] [the noun]. ".
 
 Section 2.3 - Implicit taking before putting something on
 

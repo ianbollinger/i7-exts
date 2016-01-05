@@ -11,11 +11,19 @@ To answer is a verb.
 To ask is a verb.
 To attack is a verb.
 To burn is a verb.
+To buy is a verb.
+To climb is a verb.
 To consult is a verb.
 To cut is a verb.
 To drink is a verb.
+To enter is a verb.
+To examine is a verb.
 To exit is a verb.
+To insert is a verb.
+To kiss is a verb.
 To remove is a verb.
+To swing is a verb.
+To tell is a verb.
 To tie is a verb.
 To wake is a verb.
 
@@ -300,7 +308,7 @@ The report touching yourself rule response (A) is
 	"[We] [touch] [ourselves]."
 
 The report touching yourself rule response (B) is
-	"[The actor] [touch phrase] [themselves]."
+	"[The actor] [touch] [themselves]."
 
 Chapter 2.29 - Waving
 
