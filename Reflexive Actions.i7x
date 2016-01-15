@@ -39,8 +39,7 @@ Chapter 2.2 - Removing something from
 First check an actor removing something from when the actor is the noun (this is
 the can't remove yourself from something rule):
 	if the actor is the player:
-		say "[We] [can't remove] [ourselves] from anything."
-		(A);
+		say "[We] [can't remove] [ourselves] from anything." (A);
 	stop the action.
 
 Chapter 2.3 - Dropping
