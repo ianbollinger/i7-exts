@@ -1,4 +1,4 @@
-Version 1/160104 of Better Implicit Actions by Ian Bollinger begins here.
+Version 1/160116 of Better Implicit Actions by Ian Bollinger begins here.
 
 "Provides alternate responses when some implicit actions occur."
 
@@ -51,9 +51,12 @@ The standard implicit taking rule response (B) is
 Section 2.3 - Implicit taking before putting something on
 
 The putting it on action has a truth state called implicitly taken before
-putting something on. The better the can't put what's not held rule is listed
-instead of the can't put what's not held rule in the check putting it on
-rulebook. This is the better the can't put what's not held rule:
+putting something on.
+The better the can't put what's not held rule is listed instead of the can't put
+what's not held rule in the check putting it on rulebook.
+
+Check an actor putting something on (this is the better the can't put what's not
+held rule):
 	if the actor is not carrying the noun and the actor is not wearing the
 	noun:
 		silently try the actor trying taking the noun;
@@ -64,24 +67,27 @@ rulebook. This is the better the can't put what's not held rule:
 			stop the action.
 
 The implicit taking before putting rule is listed before the standard report
-putting rule in the report putting it on rulebook. Report an actor putting
-something on (this is the implicit taking before putting rule):
-	if implicitly taken before putting something on is true:
-		if the action is not silent:
-			if the actor is the player:
-				say "[We] [take] [the noun] and [put] [it] on
-				[the second noun]." (A);
-			otherwise:
-				say "[The actor] [take] [the noun] and [put]
-				[it] on [the second noun]." (B);
-		stop the action.
+putting rule in the report putting it on rulebook.
+
+Report an actor putting something on when implicitly taken before putting
+something on is true (this is the implicit taking before putting rule):
+	if the action is not silent:
+		if the actor is the player:
+			say "[We] [take] [the noun] and [put] [it] on [the
+			second noun]." (A);
+		otherwise:
+			say "[The actor] [take] [the noun] and [put] [it] on
+			[the second noun]." (B);
+	stop the action.
 
 Section 2.4 - Implicit taking before inserting something into
 
 The inserting it into action has a truth state called implicitly taken before
-inserting something into. The better can't insert what's not held rule is listed
-instead of the can't insert what's not held rule in the check inserting it into
-rulebook. This is the better can't insert what's not held rule:
+inserting something into.
+The better can't insert what's not held rule is listed instead of the can't
+insert what's not held rule in the check inserting it into rulebook.
+
+This is the better can't insert what's not held rule:
 	if the actor is not carrying the noun and the actor is not wearing the
 	noun:
 		silently try the actor taking the noun;
@@ -92,8 +98,10 @@ rulebook. This is the better can't insert what's not held rule:
 			stop the action.
 
 The implicit taking before inserting rule is listed before the standard report
-inserting rule in the report inserting it into rulebook. Report an actor
-inserting something into (this is the implicit taking before inserting rule):
+inserting rule in the report inserting it into rulebook.
+
+Report an actor inserting something into (this is the implicit taking before
+inserting rule):
 	if implicitly taken before inserting something into is true:
 		if the action is not silent:
 			if the actor is the player:
@@ -106,11 +114,14 @@ inserting something into (this is the implicit taking before inserting rule):
 
 Section 2.5 - Implicit taking before eating
 
-The eating action has a truth state called implicitly taken before eating. The
-better can't eat portable food without carrying it rule is listed instead of the
-can't eat portable food without carrying it rule in the check eating rulebook.
-This is the better can't eat portable food without carrying it rule:
-	if the noun is portable and the actor is not carrying the noun:
+The eating action has a truth state called implicitly taken before eating.
+The better can't eat portable food without carrying it rule is listed instead of
+the can't eat portable food without carrying it rule in the check eating
+rulebook.
+
+Check an actor eating something portable (this is the better can't eat portable
+food without carrying it rule):
+	if the actor is not carrying the noun:
 		silently try the actor taking the noun;
 		if the actor is carrying the noun:
 			now implicitly taken before eating is true;
@@ -118,192 +129,209 @@ This is the better can't eat portable food without carrying it rule:
 			stop the action.
 
 The implicit taking before eating rule is listed before the standard report
-eating rule in the report eating rulebook. Report an actor eating (this is the
+eating rule in the report eating rulebook.
+
+Report an actor eating when implicitly taken before eating is true (this is the
 implicit taking before eating rule):
-	if implicitly taken before eating is true:
-		if the action is not silent:
-			if the actor is the player:
-				say "[We] [take] [the noun] and [eat] [it]."
-				(A);
-			otherwise:
-				say "[The actor] [take] [the noun] and [eat]
-				[it]." (B);
-		stop the action.
+	if the action is not silent:
+		if the actor is the player:
+			say "[We] [take] [the noun] and [eat] [it]."
+			(A);
+		otherwise:
+			say "[The actor] [take] [the noun] and [eat]
+			[it]." (B);
+	stop the action.
 
 Chapter 3 - Implicit taking off
 
 Section 3.1 - Implicit taking off before dropping
 
 The dropping action has a truth state called implicitly taken off before
-dropping. The better can't drop clothes being worn rule is listed instead of the
-can't drop clothes being worn rule in the check dropping rulebook. This is the
-better can't drop clothes being worn rule:
-	if the actor is wearing the noun:
-		silently try the actor trying taking off the noun;
-		if the actor is not wearing the noun:
-			now implicitly taken off before dropping is true;
-		otherwise:
-			stop the action.
+dropping.
+The better can't drop clothes being worn rule is listed instead of the can't
+drop clothes being worn rule in the check dropping rulebook.
+
+Check an actor dropping something when the actor is wearing the noun (this is
+the better can't drop clothes being worn rule):
+	silently try the actor trying taking off the noun;
+	if the actor is not wearing the noun:
+		now implicitly taken off before dropping is true;
+	otherwise:
+		stop the action.
 
 The implicit taking off before dropping rule is listed before the standard
-report dropping rule in the report dropping rulebook. Report an actor dropping
-(this is the implicit taking off before dropping rule):
-	if implicitly taken off before dropping is true:
-		if the action is not silent:
-			if the actor is the player:
-				say "[We] [take] off [the noun] and [drop]
-				[it]." (A);
-			otherwise:
-				say "[The actor] [take] off [the noun] and
-				[drop] [it]." (B);
-		stop the action.
+report dropping rule in the report dropping rulebook.
+
+Report an actor dropping when implicitly taken off before dropping is true (this
+is the implicit taking off before dropping rule):
+	if the action is not silent:
+		if the actor is the player:
+			say "[We] [take] off [the noun] and [drop] [it]." (A);
+		otherwise:
+			say "[The actor] [take] off [the noun] and [drop] [it]."
+			(B);
+	stop the action.
 
 Section 3.2 - Implicit taking off before putting something on
 
 The putting it on action has a truth state called implicitly taken off before
-putting something on. The better the can't put clothes being worn rule is listed
-instead of the can't put clothes being worn rule in the check putting it on
-rulebook. This is the better the can't put clothes being worn rule:
-	if the actor is wearing the noun:
-		silently try the actor trying taking off the noun;
-		if the actor is not wearing the noun:
-			now implicitly taken off before putting something on is
-			true;
-		otherwise:
-			stop the action.
+putting something on.
+The better the can't put clothes being worn rule is listed instead of the can't
+put clothes being worn rule in the check putting it on rulebook.
+
+Check an actor putting something on when the actor is wearing the noun (this is
+the better the can't put clothes being worn rule):
+	silently try the actor trying taking off the noun;
+	if the actor is not wearing the noun:
+		now implicitly taken off before putting something on is
+		true;
+	otherwise:
+		stop the action.
 
 The implicit taking off before putting rule is listed before the standard report
-putting rule in the report putting it on rulebook. Report an actor putting
-something on (this is the implicit taking off before putting rule):
-	if implicitly taken off before putting something on is true:
-		if the action is not silent:
-			if the actor is the player:
-				say "[We] [take] off [the noun] and [put] [it]
-				on [the second noun]." (A);
-			otherwise:
-				say "[The actor] [take] off [the noun] and [put]
-				[it] on [the second noun]." (B);
-		stop the action.
+putting rule in the report putting it on rulebook.
+
+Report an actor putting something on when implicitly taken off before putting
+something on is true (this is the implicit taking off before putting rule):
+	if the action is not silent:
+		if the actor is the player:
+			say "[We] [take] off [the noun] and [put] [it]
+			on [the second noun]." (A);
+		otherwise:
+			say "[The actor] [take] off [the noun] and [put]
+			[it] on [the second noun]." (B);
+	stop the action.
 
 Section 3.3 - Implicit taking off before inserting
 
 The inserting it into action has a truth state called implicitly taken off
-before inserting something into. The better the can't insert clothes being worn
-rule is listed instead of the can't insert clothes being worn rule in the check
-inserting it into rulebook. This is the better the can't insert clothes being
-worn rule:
-	if the actor is wearing the noun:
-		silently try the actor trying taking off the noun;
-		if the actor is not wearing the noun:
-			now implicitly taken off before inserting something into
-			is true;
-		otherwise:
-			stop the action.
+before inserting something into.
+The better the can't insert clothes being worn rule is listed instead of the
+can't insert clothes being worn rule in the check inserting it into rulebook.
+
+Check an actor inserting something into when the actor is wearing the noun (this
+is the better the can't insert clothes being worn rule):
+	silently try the actor trying taking off the noun;
+	if the actor is not wearing the noun:
+		now implicitly taken off before inserting something into
+		is true;
+	otherwise:
+		stop the action.
 
 The implicit taking off before inserting rule is listed before the standard
-report inserting rule in the report inserting it into rulebook. Report an actor
-inserting something into (this is the implicit taking off before inserting
-rule):
-	if implicitly taken off before inserting something into is true:
-		if the action is not silent:
-			if the actor is the player:
-				say "[We] [take] off [the noun] and [insert]
-				[it] into [the second noun]." (A);
-			otherwise:
-				say "[The actor] [take] off [the noun] and
-				[insert] [it] into [the second noun]." (B);
-		stop the action.
+report inserting rule in the report inserting it into rulebook.
+
+Report an actor inserting something into when implicitly taken off before
+inserting something into is true (this is the implicit taking off before
+inserting rule):
+	if the action is not silent:
+		if the actor is the player:
+			say "[We] [take] off [the noun] and [insert] [it] into
+			[the second noun]." (A);
+		otherwise:
+			say "[The actor] [take] off [the noun] and [insert] [it]
+			into [the second noun]." (B);
+	stop the action.
 
 Section 3.4 - Implicit taking off before eating
 
 The eating action has a truth state called implicitly taken off before eating.
 The better can't eat clothing without removing it first rule is listed instead
 of the can't eat clothing without removing it first rule in the check eating
-rulebook. This is the better can't eat clothing without removing it first rule:
-	if the actor is wearing the noun:
-		silently try the actor trying taking off the noun;
-		if the actor is not wearing the noun:
-			now implicitly taken off before eating is true;
-		otherwise:
-			stop the action.
+rulebook.
+
+Check an actor eating something when the actor is wearing the noun (this is the
+better can't eat clothing without removing it first rule):
+	silently try the actor trying taking off the noun;
+	if the actor is not wearing the noun:
+		now implicitly taken off before eating is true;
+	otherwise:
+		stop the action.
 
 The implicit taking off before eating rule is listed before the standard report
-eating rule in the report eating rulebook. Report an actor eating (this is the
-implicit taking off before eating rule):
-	if implicitly taken off before eating is true:
-		if the action is not silent:
-			if the actor is the player:
-				say "[We] [take] off [the noun] and [eat] [it]."
-				(A);
-			otherwise:
-				say "[The actor] [take] off [the noun] and [eat]
-				[it]." (B);
-		stop the action.
+eating rule in the report eating rulebook.
+
+Report an actor eating when implicitly taken off before eating is true (this is
+the implicit taking off before eating rule):
+	if the action is not silent:
+		if the actor is the player:
+			say "[We] [take] off [the noun] and [eat] [it]." (A);
+		otherwise:
+			say "[The actor] [take] off [the noun] and [eat] [it]."
+			(B);
+	stop the action.
 
 Section 3.5 - Implicit taking off before giving something to
 
 The giving it to action has a truth state called implicitly taken off before
-giving something to. The better can't give clothes being worn rule is listed
-instead of the can't give clothes being worn rule in the check giving it to
-rulebook. This is the better can't give clothes being worn rule:
-	if the actor is wearing the noun:
-		silently try the actor trying taking off the noun;
-		if the actor is not wearing the noun:
-			now implicitly taken off before giving something to is
-			true;
-		otherwise:
-			stop the action.
+giving something to.
+The better can't give clothes being worn rule is listed instead of the can't
+give clothes being worn rule in the check giving it to rulebook.
+
+Check an actor giving something to when the actor is wearing the noun (this is
+the better can't give clothes being worn rule):
+	silently try the actor trying taking off the noun;
+	if the actor is not wearing the noun:
+		now implicitly taken off before giving something to is
+		true;
+	otherwise:
+		stop the action.
 
 The implicit taking off before giving rule is listed before the standard report
-giving rule in the report giving it to rulebook. Report an actor giving
-something to (this is the implicit taking off before giving rule):
-	if implicitly taken off before giving something to is true:
-		if the action is not silent:
-			if the actor is the player:
-				say "[We] [take] off [the noun] and [give] [it]
-				to [the second noun]." (A);
-			otherwise:
-				say "[The actor] [take] off [the noun] and
-				[give] [it] to [the second noun]." (B);
-		stop the action.
+giving rule in the report giving it to rulebook.
+
+Report an actor giving something to when implicitly taken off before giving
+something to is true (this is the implicit taking off before giving rule):
+	if the action is not silent:
+		if the actor is the player:
+			say "[We] [take] off [the noun] and [give] [it] to [the
+			second noun]." (A);
+		otherwise:
+			say "[The actor] [take] off [the noun] and [give] [it]
+			to [the second noun]." (B);
+	stop the action.
 
 Section 3.6 - Implicit taking off before throwing something at
 
 The throwing it at action has a truth state called implicitly taken off before
-throwing something at. The better implicitly remove thrown clothing rule is
-listed instead of the implicitly remove thrown clothing rule in the check
-throwing it at rulebook. This is the better implicitly remove thrown clothing
-rule:
-	if the actor is wearing the noun:
-		silently try the actor trying taking off the noun;
-		if the actor is not wearing the noun:
-			now implicitly taken off before throwing something at is
-			true;
-		otherwise:
-			stop the action.
+throwing something at.
+The better implicitly remove thrown clothing rule is listed instead of the
+implicitly remove thrown clothing rule in the check throwing it at rulebook.
+
+Check an actor throwing something at when the actor is wearing the noun (this is
+the better implicitly remove thrown clothing rule):
+	silently try the actor trying taking off the noun;
+	if the actor is not wearing the noun:
+		now implicitly taken off before throwing something at is
+		true;
+	otherwise:
+		stop the action.
 
 The implicit taking off before throwing rule is listed before the block throwing
-at rule in the check throwing it at rulebook. This is the implicit taking off
-before throwing rule:
-	if implicitly taken off before throwing something at is true:
-		if the action is not silent:
-			if the actor is the player:
-				say "[We] [take] off [the noun] but [fail] to
-				[throw] [it] at [the second noun]." (A);
-			otherwise:
-				say "[The actor] [take] off [the noun] but
-				[fail] to [throw] [it] at [the second noun]."
-				(B);
-		stop the action.
+at rule in the check throwing it at rulebook.
+
+[TODO: the action partially succeeds, so this should be a report.]
+Check an actor throwing something at when implicitly taken off before throwing
+something at is true (this is the implicit taking off before throwing rule):
+	if the action is not silent:
+		if the actor is the player:
+			say "[We] [take] off [the noun] but [fail] to [throw]
+			[it] at [the second noun]." (A);
+		otherwise:
+			say "[The actor] [take] off [the noun] but [fail] to
+			[throw] [it] at [the second noun]." (B);
+	stop the action.
 
 Chapter 4 - Implicit actions before going
 
 Section 4.1 - Implicit getting off before going
 
-The going action has an object called enterable implicitly gotten off. The
-better stand up before going rule is listed instead of the stand up before going
-rule in the check going rulebook. Check an actor going when the actor is on a
-supporter (called the chaise) (this is the better stand up before going rule):
+The going action has an object called enterable implicitly gotten off.
+The better stand up before going rule is listed instead of the stand up before
+going rule in the check going rulebook.
+
+Check an actor going when the actor is on a supporter (called the chaise) (this
+is the better stand up before going rule):
 	silently try the actor exiting;
 	if the actor is not on the chaise:
 		now enterable implicitly gotten off is the chaise;
@@ -311,8 +339,9 @@ supporter (called the chaise) (this is the better stand up before going rule):
 		stop the action.
 
 The implicit getting off before going rule is listed before the describe room
-gone into rule in the report going rulebook. Report an actor going (this is the
-implicit getting off before going rule):
+gone into rule in the report going rulebook.
+
+Report an actor going (this is the implicit getting off before going rule):
 	if the enterable implicitly gotten off is something and the action is
 	not silent:
 		if the actor is the player:
@@ -324,10 +353,11 @@ implicit getting off before going rule):
 
 Section 4.2 - Implicit opening before going
 
-The going action has a truth state called implicitly opening before going. The
-better can't go through closed doors rule is listed instead of the can't go
-through closed doors rule in the check going rulebook. This is the better can't
-go through closed doors rule:
+The going action has a truth state called implicitly opening before going.
+The better can't go through closed doors rule is listed instead of the can't go
+through closed doors rule in the check going rulebook.
+
+This is the better can't go through closed doors rule:
 	if the door gone through is not nothing and the door gone through is
 	closed:
 		silently try the actor opening the door gone through;
@@ -337,8 +367,9 @@ go through closed doors rule:
 			stop the action.
 
 The implicit opening before going rule is listed before the describe room gone
-into rule in the report going rulebook. Report an actor going (this is the
-implicit opening before going rule):
+into rule in the report going rulebook.
+
+Report an actor going (this is the implicit opening before going rule):
 	if implicitly opening before going is true and the action is not silent:
 		if the actor is the player:
 			say "[We] [open] the [door gone through].[command
@@ -350,90 +381,91 @@ implicit opening before going rule):
 Section 4.3 - Reporting actors' movement
 
 The implicit action before going rule is listed before the describe room gone
-into rule in the report going rulebook. Report an actor going (this is the
-implicit action before going rule):
-	if the actor is not the player and the enterable implicitly gotten off
-	is something or implicitly opening before going is true:
-		if the noun is a direction:
-			if the location is the room gone from or the player is
-			within the vehicle gone by or the player is within the
-			thing gone with:
-				if the room gone from is the room gone to:
-					continue the action;
-				otherwise:
-					if the noun is up:
-						say "[go] up" (A);
-					otherwise if the noun is down:
-						say "[go] down" (B);
-					otherwise:
-						say "[go] [noun]" (C);
+into rule in the report going rulebook.
+
+Report an actor going (this is the implicit action before going rule):
+	if the actor is the player or (the enterable implicitly gotten off is
+	nothing and implicitly opening before going is false):
+		continue the action;
+	if the noun is a direction:
+		if the location is the room gone from or the player is within
+		the vehicle gone by or the player is within the thing gone with:
+			if the room gone from is the room gone to:
+				continue the action;
 			otherwise:
-				let the back way be the opposite of the noun;
-				if the location is the room gone to:
-					let the room back the other way be the
-					room back way from the location;
-					let the room normally this way be the
-					room noun from the room gone from;
-					if the room back the other way is the
-					room gone from or the room back the
-					other way is the room normally this way:
-						if the back way is up:
-							say "[arrive] from
-							above" (D);
-						otherwise if the back way is
-						down:
-							say "[arrive] from
-							below" (E);
-						otherwise:
-							say "[arrive] from [the
-							back way]" (F);
-					otherwise:
-						say "[arrive]" (G);
+				if the noun is up:
+					say "[go] up" (A);
+				otherwise if the noun is down:
+					say "[go] down" (B);
 				otherwise:
-					if the back way is up:
-						say "[arrive] at [the room gone
-						to] from above" (H);
-					otherwise if the back way is down:
-						say "[arrive] at [the room gone
-						to] from below" (I);
-					otherwise:
-						say "[arrive] at [the room gone
-						to] from [the back way]" (J);
-		otherwise if the location is the room gone from:
-			say "[go] through [the noun]" (K);
+					say "[go] [noun]" (C);
 		otherwise:
-			say "[arrive] from [the noun]" (L);
-		if the vehicle gone by is not nothing:
-			if the vehicle gone by is a supporter:
-				say " on [the vehicle gone by]" (M);
+			let the back way be the opposite of the noun;
+			if the location is the room gone to:
+				let the room back the other way be the room back
+				way from the location;
+				let the room normally this way be the room noun
+				from the room gone from;
+				if the room back the other way is the room gone
+				from or the room back the other way is the room
+				normally this way:
+					if the back way is up:
+						say "[arrive] from above" (D);
+					otherwise if the back way is down:
+						say "[arrive] from below" (E);
+					otherwise:
+						say "[arrive] from [the back
+						way]" (F);
+				otherwise:
+					say "[arrive]" (G);
 			otherwise:
-				say " in [the vehicle gone by]" (N);
-		if the thing gone with is not nothing:
-			if the player is within the thing gone with:
-				say ", pushing [the thing gone with] in front,
-				and [us] along too" (O);
-			otherwise if the player is within the vehicle gone by:
-				say ", pushing [the thing gone with] in front"
-				(P);
-			otherwise if the location is the room gone from:
-				say ", pushing [the thing gone with] away" (Q);
-			otherwise:
-				say ", pushing [the thing gone with] in" (R);
-		if the player is within the vehicle gone by and the player is
-		not within the thing gone with:
-			say ", taking [us] along." (S);
-			try looking;
-			continue the action;
-		say "." (T);
-		stop the action.
+				if the back way is up:
+					say "[arrive] at [the room gone to] from
+					above" (H);
+				otherwise if the back way is down:
+					say "[arrive] at [the room gone to] from
+					below" (I);
+				otherwise:
+					say "[arrive] at [the room gone to] from
+					[the back way]" (J);
+	otherwise if the location is the room gone from:
+		say "[go] through [the noun]" (K);
+	otherwise:
+		say "[arrive] from [the noun]" (L);
+	if the vehicle gone by is not nothing:
+		if the vehicle gone by is a supporter:
+			say " on [the vehicle gone by]" (M);
+		otherwise:
+			say " in [the vehicle gone by]" (N);
+	if the thing gone with is not nothing:
+		if the player is within the thing gone with:
+			say ", pushing [the thing gone with] in front, and [us]
+			along too" (O);
+		otherwise if the player is within the vehicle gone by:
+			say ", pushing [the thing gone with] in front" (P);
+		otherwise if the location is the room gone from:
+			say ", pushing [the thing gone with] away" (Q);
+		otherwise:
+			say ", pushing [the thing gone with] in" (R);
+	if the player is within the vehicle gone by and the player is
+	not within the thing gone with:
+		say ", taking [us] along." (S);
+		try looking;
+		continue the action;
+	say "." (T);
+	stop the action.
 
 Chapter 5 - Implicit passing through barriers
 
 The entering action has a truth state called implicitly passing through barriers
-before entering. The better implicitly pass through other barriers rule is
-listed instead of the implicitly pass through other barriers rule in the check
-entering rulebook. This is the better implicitly pass through other barriers
-rule:
+before entering.
+The better implicitly pass through other barriers rule is listed instead of the
+implicitly pass through other barriers rule in the check entering rulebook.
+
+[TODO: technically this should produce a list of text and not report it until
+a report rule.]
+Check an actor going (this is the better implicitly pass through other barriers
+rule):
 	if the holder of the actor is the holder of the noun:
 		continue the action;
 	now implicitly passing through barriers before entering is true;
@@ -560,15 +592,17 @@ rule:
 	true],[end if] and [run paragraph on]" (P);
 
 The implicit passing through barriers before entering rule is listed before the
-standard report entering rule in the report entering rulebook. Report an actor
-entering (this is the implicit passing through barriers before entering rule):
-	if implicitly passing through barriers before entering is true:
-		if the action is not silent:
-			if the noun is a container:
-				say "into [the noun]." (A);
-			otherwise:
-				say "onto [the noun]." (B);
-		stop the action.
+standard report entering rule in the report entering rulebook.
+
+Report an actor entering when implicitly passing through barriers before
+entering is true (this is the implicit passing through barriers before entering
+rule):
+	if the action is not silent:
+		if the noun is a container:
+			say "into [the noun]." (A);
+		otherwise:
+			say "onto [the noun]." (B);
+	stop the action.
 
 Better Implicit Actions ends here.
 
