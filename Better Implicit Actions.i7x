@@ -57,8 +57,7 @@ what's not held rule in the check putting it on rulebook.
 
 Check an actor putting something on (this is the better the can't put what's not
 held rule):
-	if the actor is not carrying the noun and the actor is not wearing the
-	noun:
+	unless the actor is carrying the noun or the actor is wearing the noun:
 		silently try the actor trying taking the noun;
 		if the actor is carrying the noun:
 			now implicitly taken before putting something on is
@@ -88,8 +87,7 @@ The better can't insert what's not held rule is listed instead of the can't
 insert what's not held rule in the check inserting it into rulebook.
 
 This is the better can't insert what's not held rule:
-	if the actor is not carrying the noun and the actor is not wearing the
-	noun:
+	unless the actor is carrying the noun or the actor is wearing the noun:
 		silently try the actor taking the noun;
 		if the actor is carrying the noun:
 			now implicitly taken before inserting something into is
@@ -121,7 +119,7 @@ rulebook.
 
 Check an actor eating something portable (this is the better can't eat portable
 food without carrying it rule):
-	if the actor is not carrying the noun:
+	unless the actor is carrying the noun:
 		silently try the actor taking the noun;
 		if the actor is carrying the noun:
 			now implicitly taken before eating is true;
@@ -154,7 +152,7 @@ drop clothes being worn rule in the check dropping rulebook.
 Check an actor dropping something when the actor is wearing the noun (this is
 the better can't drop clothes being worn rule):
 	silently try the actor trying taking off the noun;
-	if the actor is not wearing the noun:
+	unless the actor is wearing the noun:
 		now implicitly taken off before dropping is true;
 	otherwise:
 		stop the action.
@@ -212,7 +210,7 @@ can't insert clothes being worn rule in the check inserting it into rulebook.
 Check an actor inserting something into when the actor is wearing the noun (this
 is the better the can't insert clothes being worn rule):
 	silently try the actor trying taking off the noun;
-	if the actor is not wearing the noun:
+	unless the actor is wearing the noun:
 		now implicitly taken off before inserting something into
 		is true;
 	otherwise:
@@ -243,7 +241,7 @@ rulebook.
 Check an actor eating something when the actor is wearing the noun (this is the
 better can't eat clothing without removing it first rule):
 	silently try the actor trying taking off the noun;
-	if the actor is not wearing the noun:
+	unless the actor is wearing the noun:
 		now implicitly taken off before eating is true;
 	otherwise:
 		stop the action.
@@ -271,7 +269,7 @@ give clothes being worn rule in the check giving it to rulebook.
 Check an actor giving something to when the actor is wearing the noun (this is
 the better can't give clothes being worn rule):
 	silently try the actor trying taking off the noun;
-	if the actor is not wearing the noun:
+	unless the actor is wearing the noun:
 		now implicitly taken off before giving something to is
 		true;
 	otherwise:
@@ -301,7 +299,7 @@ implicitly remove thrown clothing rule in the check throwing it at rulebook.
 Check an actor throwing something at when the actor is wearing the noun (this is
 the better implicitly remove thrown clothing rule):
 	silently try the actor trying taking off the noun;
-	if the actor is not wearing the noun:
+	unless the actor is wearing the noun:
 		now implicitly taken off before throwing something at is
 		true;
 	otherwise:
@@ -333,7 +331,7 @@ going rule in the check going rulebook.
 Check an actor going when the actor is on a supporter (called the chaise) (this
 is the better stand up before going rule):
 	silently try the actor exiting;
-	if the actor is not on the chaise:
+	unless the actor is on the chaise:
 		now enterable implicitly gotten off is the chaise;
 	otherwise:
 		stop the action.
@@ -341,9 +339,9 @@ is the better stand up before going rule):
 The implicit getting off before going rule is listed before the describe room
 gone into rule in the report going rulebook.
 
-Report an actor going (this is the implicit getting off before going rule):
-	if the enterable implicitly gotten off is something and the action is
-	not silent:
+Report an actor going when the enterable implicitly gotten off is something
+	(this is the implicit getting off before going rule):
+	if the action is not silent:
 		if the actor is the player:
 			say "[We] [get] off [the enterable implicitly gotten
 			off].[command clarification break]" (A);
@@ -357,9 +355,9 @@ The going action has a truth state called implicitly opening before going.
 The better can't go through closed doors rule is listed instead of the can't go
 through closed doors rule in the check going rulebook.
 
-This is the better can't go through closed doors rule:
-	if the door gone through is not nothing and the door gone through is
-	closed:
+Check an actor going when the door gone through is something (this is the better
+can't go through closed doors rule):
+	if the door gone through is closed:
 		silently try the actor opening the door gone through;
 		if the door gone through is open:
 			now implicitly opening before going is true;
@@ -369,8 +367,9 @@ This is the better can't go through closed doors rule:
 The implicit opening before going rule is listed before the describe room gone
 into rule in the report going rulebook.
 
-Report an actor going (this is the implicit opening before going rule):
-	if implicitly opening before going is true and the action is not silent:
+Report an actor going when implicitly opening before going is true (this is the
+implicit opening before going rule):
+	if the action is not silent:
 		if the actor is the player:
 			say "[We] [open] the [door gone through].[command
 			clarification break]" (A);
@@ -464,11 +463,13 @@ implicitly pass through other barriers rule in the check entering rulebook.
 
 [TODO: technically this should produce a list of text and not report it until
 a report rule.]
-Check an actor going (this is the better implicitly pass through other barriers
-rule):
+
+This is the better implicitly pass through other barriers rule:
 	if the holder of the actor is the holder of the noun:
 		continue the action;
 	now implicitly passing through barriers before entering is true;
+	unless the action is not silent:
+		stop the action;
 	let the local ceiling be the common ancestor of the actor with the noun;
 	let first item be true;
 	let at least two items be false;
@@ -477,37 +478,33 @@ rule):
 		silently try the actor trying exiting;
 		if the holder of the actor is the current home:
 			stop the action;
-		if the action is not silent:
-			if the current home is a supporter or the current home
-			is an animal:
-				if first item is true:
-					if the actor is the player:
-						say "[We] [get] off [the current
-						home][run paragraph on]" (A);
-					otherwise:
-						say "[The actor] [get] off [the
-						current home][run paragraph on]"
-						(B);
-					now first item is false;
+		if the current home is a supporter or the current home
+		is an animal:
+			if first item is true:
+				if the actor is the player:
+					say "[We] [get] off [the current
+					home][run paragraph on]" (A);
 				otherwise:
-					say ", off [the current home][run
-					paragraph on]" (C);
-					now at least two items is true;
+					say "[The actor] [get] off [the current
+					home][run paragraph on]" (B);
+				now first item is false;
 			otherwise:
-				if first item is true:
-					if the actor is the player:
-						say "[We] [get] out of [the
-						current home][run paragraph
-						on]" (D);
-					otherwise:
-						say "[The actor] [get] out of
-						[the current home][run paragraph
-						on]" (E);
-					now first item is false;
+				say ", off [the current home][run paragraph on]"
+				(C);
+				now at least two items is true;
+		otherwise:
+			if first item is true:
+				if the actor is the player:
+					say "[We] [get] out of [the
+					home][run paragraph on]" (D);
 				otherwise:
-					say ", out of [the current home][run
-					paragraph on]" (F);
-					now at least two items is true;
+					say "[The actor] [get] out of [the
+					current home][run paragraph on]" (E);
+				now first item is false;
+			otherwise:
+				say ", out of [the current home][run paragraph
+				on]" (F);
+				now at least two items is true;
 	if the holder of the actor is the noun:
 		stop the action;
 	if the holder of the actor is not the holder of the noun:
@@ -520,72 +517,53 @@ rule):
 				target;
 				if the holder of the actor is not the target:
 					stop the action;
-				if the action is not silent:
-					if the target is a supporter:
-						if first item is true:
-							if the actor is the
-							player:
-								say "[We] [get]
-								onto [the
-								target][run
-								paragraph on]"
-								(G);
-							otherwise:
-								say "[The actor]
-								[get] onto [the
-								target][run
-								paragraph on]"
-								(H);
-							now first item is false;
+				if the target is a supporter:
+					if first item is true:
+						if the actor is the player:
+							say "[We] [get] onto
+							[the target][run
+							paragraph on]" (G);
 						otherwise:
-							say ", onto [the
-							target][run paragraph
-							on]" (I);
-							now at least two items
-							is true;
-					otherwise if the target is a container:
-						if first item is true:
-							if the actor is the
-							player:
-								say "[We] [get]
-								into [the
-								target][run
-								paragraph on]"
-								(J);
-							otherwise:
-								say "[The actor]
-								[get] into [the
-								target][run
-								paragraph on]"
-								(K);
-							now first item is false;
-						otherwise:
-							say ", into [the
-							target][run paragraph
-							on]" (L);
-							now at least two items
-							is true;
+							say "[The actor] [get]
+							onto [the target][run
+							paragraph on]" (H);
+						now first item is false;
 					otherwise:
-						if first item is true:
-							if the actor is the
-							player:
-								say "[We]
-								[enter] [the
-								target][run
-								paragraph on]"
-								(M);
-							otherwise:
-								say "[The actor]
-								[enter] [the
-								target][run
-								paragraph on]"
-								(N);
-							now first item is false;
+						say ", onto [the target][run
+						paragraph on]" (I);
+						now at least two items
+						is true;
+				otherwise if the target is a container:
+					if first item is true:
+						if the actor is the player:
+							say "[We] [get]
+							into [the target][run
+							paragraph on]" (J);
 						otherwise:
-							say ", [the target][run
-							paragraph on]" (O);
-							now at least two items
-							is true;
+							say "[The actor] [get]
+							into [the target][run
+							paragraph on]" (K);
+						now first item is false;
+					otherwise:
+						say ", into [the
+						target][run paragraph
+						on]" (L);
+						now at least two items is true;
+				otherwise:
+					if first item is true:
+						if the actor is the player:
+							say "[We] [enter] [the
+							target][run paragraph
+							on]" (M);
+						otherwise:
+							say "[The actor] [enter]
+							[the target][run
+							paragraph on]" (N);
+						now first item is false;
+					otherwise:
+						say ", [the target][run
+						paragraph on]" (O);
+						now at least two items is true;
 				break;
 			let the target be the holder of the target;
 	say "[if serial comma option is active and at least two items is
