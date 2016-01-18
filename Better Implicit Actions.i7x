@@ -1,4 +1,4 @@
-Version 1/160116 of Better Implicit Actions by Ian Bollinger begins here.
+Version 1/160118 of Better Implicit Actions by Ian Bollinger begins here.
 
 "Provides alternate responses when some implicit actions occur."
 
@@ -339,6 +339,7 @@ is the better stand up before going rule):
 The implicit getting off before going rule is listed before the describe room
 gone into rule in the report going rulebook.
 
+[TODO: what if the actor gets off a supporter and opens a door implicitly?]
 Report an actor going when the enterable implicitly gotten off is something
 	(this is the implicit getting off before going rule):
 	if the action is not silent:
@@ -458,53 +459,22 @@ Chapter 5 - Implicit passing through barriers
 
 The entering action has a truth state called implicitly passing through barriers
 before entering.
+The entering action has a list of objects called implicitly gotten off.
+The entering action has a list of objects called implicitly gotten on.
 The better implicitly pass through other barriers rule is listed instead of the
 implicitly pass through other barriers rule in the check entering rulebook.
-
-[TODO: technically this should produce a list of text and not report it until
-a report rule.]
 
 This is the better implicitly pass through other barriers rule:
 	if the holder of the actor is the holder of the noun:
 		continue the action;
 	now implicitly passing through barriers before entering is true;
-	unless the action is not silent:
-		stop the action;
 	let the local ceiling be the common ancestor of the actor with the noun;
-	let first item be true;
-	let at least two items be false;
 	while the holder of the actor is not the local ceiling:
 		let the current home be the holder of the actor;
 		silently try the actor trying exiting;
 		if the holder of the actor is the current home:
 			stop the action;
-		if the current home is a supporter or the current home
-		is an animal:
-			if first item is true:
-				if the actor is the player:
-					say "[We] [get] off [the current
-					home][run paragraph on]" (A);
-				otherwise:
-					say "[The actor] [get] off [the current
-					home][run paragraph on]" (B);
-				now first item is false;
-			otherwise:
-				say ", off [the current home][run paragraph on]"
-				(C);
-				now at least two items is true;
-		otherwise:
-			if first item is true:
-				if the actor is the player:
-					say "[We] [get] out of [the
-					home][run paragraph on]" (D);
-				otherwise:
-					say "[The actor] [get] out of [the
-					current home][run paragraph on]" (E);
-				now first item is false;
-			otherwise:
-				say ", out of [the current home][run paragraph
-				on]" (F);
-				now at least two items is true;
+		add the current home to implicitly gotten off;
 	if the holder of the actor is the noun:
 		stop the action;
 	if the holder of the actor is not the holder of the noun:
@@ -517,57 +487,9 @@ This is the better implicitly pass through other barriers rule:
 				target;
 				if the holder of the actor is not the target:
 					stop the action;
-				if the target is a supporter:
-					if first item is true:
-						if the actor is the player:
-							say "[We] [get] onto
-							[the target][run
-							paragraph on]" (G);
-						otherwise:
-							say "[The actor] [get]
-							onto [the target][run
-							paragraph on]" (H);
-						now first item is false;
-					otherwise:
-						say ", onto [the target][run
-						paragraph on]" (I);
-						now at least two items
-						is true;
-				otherwise if the target is a container:
-					if first item is true:
-						if the actor is the player:
-							say "[We] [get]
-							into [the target][run
-							paragraph on]" (J);
-						otherwise:
-							say "[The actor] [get]
-							into [the target][run
-							paragraph on]" (K);
-						now first item is false;
-					otherwise:
-						say ", into [the
-						target][run paragraph
-						on]" (L);
-						now at least two items is true;
-				otherwise:
-					if first item is true:
-						if the actor is the player:
-							say "[We] [enter] [the
-							target][run paragraph
-							on]" (M);
-						otherwise:
-							say "[The actor] [enter]
-							[the target][run
-							paragraph on]" (N);
-						now first item is false;
-					otherwise:
-						say ", [the target][run
-						paragraph on]" (O);
-						now at least two items is true;
+				add the target to implicitly gotten on;
 				break;
 			let the target be the holder of the target;
-	say "[if serial comma option is active and at least two items is
-	true],[end if] and [run paragraph on]" (P);
 
 The implicit passing through barriers before entering rule is listed before the
 standard report entering rule in the report entering rulebook.
@@ -575,11 +497,76 @@ standard report entering rule in the report entering rulebook.
 Report an actor entering when implicitly passing through barriers before
 entering is true (this is the implicit passing through barriers before entering
 rule):
-	if the action is not silent:
-		if the noun is a container:
-			say "into [the noun]." (A);
+	unless the action is not silent:
+		stop the action;
+	let first item be true;
+	let at least two items be false;
+	repeat with the current home running through implicitly gotten off:
+		if the current home is a supporter or the current home is an
+		animal:
+			if first item is true:
+				if the actor is the player:
+					say "[We] [get] off [the current
+					home]" (A);
+				otherwise:
+					say "[The actor] [get] off [the current
+					home]" (B);
+				now first item is false;
+			otherwise:
+				say ", off [the current home]" (C);
+				now at least two items is true;
 		otherwise:
-			say "onto [the noun]." (B);
+			if first item is true:
+				if the actor is the player:
+					say "[We] [get] out of [the current
+					home]" (D);
+				otherwise:
+					say "[The actor] [get] out of [the
+					current home]" (E);
+				now first item is false;
+			otherwise:
+				say ", out of [the current home]" (F);
+				now at least two items is true;
+	repeat with the target running through implicitly gotten on:
+		if the target is a supporter:
+			if first item is true:
+				if the actor is the player:
+					say "[We] [get] onto [the target]" (G);
+				otherwise:
+					say "[The actor] [get] onto [the
+					target]" (H);
+				now first item is false;
+			otherwise:
+				say ", onto [the target]" (I);
+				now at least two items is true;
+		otherwise if the target is a container:
+			if first item is true:
+				if the actor is the player:
+					say "[We] [get] into [the target]" (J);
+				otherwise:
+					say "[The actor] [get] into [the
+					target]" (K);
+				now first item is false;
+			otherwise:
+				say ", into [the target]" (L);
+				now at least two items is true;
+		otherwise:
+			if first item is true:
+				if the actor is the player:
+					say "[We] [enter] [the target]" (M);
+				otherwise:
+					say "[The actor] [enter] [the target]"
+					(N);
+				now first item is false;
+			otherwise:
+				say ", [the target]" (O);
+				now at least two items is true;
+	say "[if serial comma option is active and at least two items is
+	true],[end if] and " (P);
+	if the noun is a container:
+		say "into [the noun]." (Q);
+	otherwise:
+		say "onto [the noun]." (R);
 	stop the action.
 
 Better Implicit Actions ends here.
